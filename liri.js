@@ -2,6 +2,7 @@ require("dotenv").config()
 var axios = require("axios")
 var moment = require("moment")
 var fs = require("fs")
+// var childCommand = require('child-command');
 var keys = require("./keys.js")
 var Spotify = require('node-spotify-api')
 var spotify = new Spotify(keys.spotify)
@@ -10,6 +11,16 @@ var userTitle = process.argv[3]
  
 switch (userOperand) {
     case "spotify-this-song":
+
+        fs.appendFile("log.txt", userOperand + "," + userTitle + "\n", function(err) {
+            if (err) {
+                return console.log(error);
+            }
+        })
+
+        if (userTitle === undefined) {
+            userTitle = "151 Rum"
+        }
 
         spotify
             .search({ type: 'track', query: userTitle, limit: 3 })
@@ -29,6 +40,16 @@ switch (userOperand) {
         break;
     
     case "concert-this":
+
+        fs.appendFile("log.txt", userOperand + "," + userTitle + "\n", function(err) {
+            if (err) {
+                return console.log(error);
+            }
+        })
+
+        if (userTitle === undefined) {
+            userTitle = "Run The Jewels"
+        }
         
         var queryUrl = "https://rest.bandsintown.com/artists/" + userTitle + "/events?app_id=codingbootcamp";
         axios.get(queryUrl).then(
@@ -52,6 +73,16 @@ switch (userOperand) {
 
     case "movie-this":
 
+        fs.appendFile("log.txt", userOperand + "," + userTitle + "\n", function(err) {
+            if (err) {
+                return console.log(error);
+            }
+        })
+
+        if (userTitle === undefined) {
+            userTitle = "Ted 2"
+        }
+
         var queryUrl = "http://www.omdbapi.com/?t=" + userTitle + "&y=&plot=short&apikey=trilogy";
         axios.get(queryUrl).then(
             function(response) {
@@ -74,6 +105,21 @@ switch (userOperand) {
 
     case "do-what-it-says":
         
-        
+        fs.readFile("random.txt", "utf8", function(err, response) {
+            if (err) {
+                return console.log(error);
+            }
+
+            var commands = response.split(",")
+            console.log(commands)
+            userOperand = commands[0]
+            userTitle = commands[1]
+
+            // childCommand('node liri.js ' + userOperand + userTitle)
+            // .then((result) => {
+            //     console.log(result.stdout);
+            // });
+
+        })
         break;
 }
