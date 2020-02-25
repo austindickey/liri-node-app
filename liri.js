@@ -1,8 +1,9 @@
+// use functions for each task instead of just a switch so that do what it says will work when it calls the operand...
+
 require("dotenv").config()
 var axios = require("axios")
 var moment = require("moment")
 var fs = require("fs")
-// var childCommand = require('child-command');
 var keys = require("./keys.js")
 var Spotify = require('node-spotify-api')
 var spotify = new Spotify(keys.spotify)
@@ -14,7 +15,7 @@ switch (userOperand) {
 
         fs.appendFile("log.txt", userOperand + "," + userTitle + "\n", function(err) {
             if (err) {
-                return console.log(error);
+                return console.log(error)
             }
         })
 
@@ -25,8 +26,6 @@ switch (userOperand) {
         spotify
             .search({ type: 'track', query: userTitle, limit: 3 })
             .then(function(response) {
-                // console.log(response);
-                // console.log(response.tracks.items[0])
                 console.log("====================================\n")
                 console.log("Artist Name: " + response.tracks.items[0].artists[0].name + "\n")
                 console.log("Track Name: " + response.tracks.items[0].name + "\n")
@@ -35,7 +34,7 @@ switch (userOperand) {
                 console.log("====================================")
             })
             .catch(function(err) {
-                console.log(err);
+                console.log(err)
             });
         break;
     
@@ -43,7 +42,7 @@ switch (userOperand) {
 
         fs.appendFile("log.txt", userOperand + "," + userTitle + "\n", function(err) {
             if (err) {
-                return console.log(error);
+                return console.log(error)
             }
         })
 
@@ -54,11 +53,11 @@ switch (userOperand) {
         var queryUrl = "https://rest.bandsintown.com/artists/" + userTitle + "/events?app_id=codingbootcamp";
         axios.get(queryUrl).then(
             function(response) {
-                // console.log(response.data)
+
                 for (var i = 0; i < 6; i++) {
                     var concertDate = response.data[i].datetime
                     var formattedDate = moment(concertDate).format('MMMM Do YYYY, h:mm a')
-                    // console.log(response.data[i])
+
                     console.log("====================================\n")
                     console.log("Venue: " + response.data[i].venue.name + "\n")
                     console.log("Location: " + response.data[i].venue.city + ", " + response.data[i].venue.region + "\n")
@@ -67,7 +66,7 @@ switch (userOperand) {
                 }
             })
             .catch(function(err) {
-                console.log(err);
+                console.log(err)
             });
         break;
 
@@ -75,7 +74,7 @@ switch (userOperand) {
 
         fs.appendFile("log.txt", userOperand + "," + userTitle + "\n", function(err) {
             if (err) {
-                return console.log(error);
+                return console.log(error)
             }
         })
 
@@ -86,7 +85,7 @@ switch (userOperand) {
         var queryUrl = "http://www.omdbapi.com/?t=" + userTitle + "&y=&plot=short&apikey=trilogy";
         axios.get(queryUrl).then(
             function(response) {
-                // console.log(response)
+
                 console.log("====================================\n")
                 console.log("Movie Title: " + response.data.Title + "\n")
                 console.log("Release Year: " + response.data.Year + "\n")
@@ -99,7 +98,7 @@ switch (userOperand) {
                 console.log("====================================")
             })
             .catch(function(err) {
-                console.log(err);
+                console.log(err)
             });
         break;
 
@@ -107,7 +106,7 @@ switch (userOperand) {
         
         fs.readFile("random.txt", "utf8", function(err, response) {
             if (err) {
-                return console.log(error);
+                return console.log(error)
             }
 
             var commands = response.split(",")
@@ -115,10 +114,19 @@ switch (userOperand) {
             userOperand = commands[0]
             userTitle = commands[1]
 
-            // childCommand('node liri.js ' + userOperand + userTitle)
-            // .then((result) => {
-            //     console.log(result.stdout);
-            // });
+            switch (userOperand) {
+                case "spotify-this-song":
+                    
+                    break;
+                
+                case "movie-this":
+                    
+                    break;
+
+                case "concert-this":
+                    
+                    break;
+            }
 
         })
         break;
