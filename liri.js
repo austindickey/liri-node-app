@@ -6,7 +6,7 @@ var keys = require("./keys.js")
 var Spotify = require('node-spotify-api')
 var spotify = new Spotify(keys.spotify)
 var userOperand = process.argv[2]
-var userTitle = process.argv[3]
+var userTitle = process.argv.slice(3).join(" ")
 
 function spotifyThis() {
     fs.appendFile("log.txt", userOperand + "," + userTitle + "\n", function(err) {
@@ -31,6 +31,7 @@ function spotifyThis() {
         })
         .catch(function(err) {
             console.log(err)
+            console.log("\n===============================================\nNo matching songs. Please try something else.\n===============================================\n")
         });
 }
 
@@ -49,7 +50,13 @@ function concertThis() {
     axios.get(queryUrl).then(
         function(response) {
 
-            for (var i = 0; i < 6; i++) {
+            var stopNum = 5
+
+            if (response.data.length < 5) {
+                stopNum = response.data.length
+            }
+
+            for (var i = 0; i < stopNum; i++) {
                 var concertDate = response.data[i].datetime
                 var formattedDate = moment(concertDate).format('MMMM Do YYYY, h:mm a')
 
@@ -61,7 +68,7 @@ function concertThis() {
             }
         })
         .catch(function(err) {
-            console.log(err)
+            console.log(err.response.data.errorMessage)
         });
 }
 
@@ -73,7 +80,7 @@ function movieThis() {
     })
 
     if (userTitle === undefined) {
-        userTitle = "Ted 2"
+        userTitle = "Ted"
     }
 
     var queryUrl = "http://www.omdbapi.com/?t=" + userTitle + "&y=&plot=short&apikey=trilogy";
@@ -93,9 +100,10 @@ function movieThis() {
         })
         .catch(function(err) {
             console.log(err)
+            console.log("\n===============================================\nNo matching movies. Please try something else.\n===============================================\n")
         })
 }
- 
+
 switch (userOperand) {
     case "spotify-this-song":
         spotifyThis()
