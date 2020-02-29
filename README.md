@@ -31,6 +31,8 @@ npm i
 
 ---
 
+**Songs**
+
 If you would like to look up data about a song, type the following in your terminal:
 
 ```
@@ -46,7 +48,13 @@ It will output the following:
 
 _If a song name is not provided, results for the song "151 Rum" by JID will be returned._
 
+_**Demo:**_
+
+![alt text](img/spotify-this-song.png "spotify-this demo")
+
 ---
+
+**Movies**
 
 If you would like to look up data about a movie, type the following in your terminal:
 
@@ -67,7 +75,13 @@ It will output the following:
 
 _If a movie name is not provided, results for the movie "Ted" will be returned._
 
+_**Demo:**_
+
+![alt text](img/movie-this.png "movie-this demo")
+
 ---
+
+**Concerts**
 
 If you would like to look up upcoming concerts for a music artist, type the following in your terminal:
 
@@ -83,7 +97,13 @@ It will output the following for the next 5 concerts:
 
 _If an artist or band name is not provided, results for the band "Run the Jewels" will be returned._
 
+_**Demo:**_
+
+![alt text](img/concert-this.png "concert-this demo")
+
 ---
+
+**Do What It Says**
 
 There is a file called `random.txt` that contains a command to be run. Use the following code to access it:
 
@@ -93,8 +113,16 @@ node liri do-what-it-says
 
 This will work the same as the other functions based of what ever is entered in the text file.
 
+_**Demo:**_
+
+![alt text](img/do-what-it-says.png "do-what-it-says demo")
+
 ---
 
 ### **The Log File**
 
 The `log.txt` file simply captures all of the commands that have been entered.
+
+_**Demo:**_
+
+![alt text](img/log.png "log demo")
