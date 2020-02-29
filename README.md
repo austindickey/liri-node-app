@@ -27,6 +27,16 @@ Naviagte to the folder in your terminal, and install all the necessary dependenc
 npm i
 ```
 
+Next, create a file named `.env`, add the following to it, replacing the values with your API keys (no quotes) once you have them:
+
+```js
+# Spotify API keys
+
+SPOTIFY_ID=your-spotify-id
+SPOTIFY_SECRET=your-spotify-secret
+
+```
+
 ### **How To Utilize Liri**
 
 ---
