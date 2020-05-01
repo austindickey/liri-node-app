@@ -21,7 +21,7 @@ This is a text based driven app that allows a user to get information about a pa
 ---
 
 ### **Initial Setup**
-Naviagte to the folder in your terminal, and install all the necessary dependencies with:
+Navigate to the folder in your terminal, and install all the necessary dependencies with:
 
 ```
 npm i
